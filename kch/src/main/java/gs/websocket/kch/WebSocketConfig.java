@@ -3,12 +3,14 @@ package gs.websocket.kch;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration //spring configuration class 애너테이션
 @EnableWebSocketMessageBroker // 메시지 브로커가 지원하는 웹소켓 메시지 핸들링이 가능하도록 함.
+@CrossOrigin
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     // 메시지 브로커 설정을 위한 기본 메서드 구현
@@ -20,6 +22,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
-        registry.addEndpoint("/gs-guide-websocket"); //websocket 연결을 시작하는 경로
+        registry.addEndpoint("/gs-guide-websocket")
+                .setAllowedOrigins("*")
+                .withSockJS(); //websocket 연결을 시작하는 경로
     }
 }

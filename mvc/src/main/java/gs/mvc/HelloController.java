@@ -1,2 +1,5 @@
-package gs.mvc;public class HelloController {
+package gs.mvc;
+
+@RestController
+public class HelloController {
 }
